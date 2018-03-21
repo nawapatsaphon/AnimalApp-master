@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     ArrayList<Integer> qID = new ArrayList<Integer>(); //เป็นชนิด  array สำหรับการสุ่มข้อคำถาม
     String answer;
     int score = 0;
+    String getNameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,7 +228,8 @@ public class GameActivity extends AppCompatActivity {
             score++;
         }
         if (qID.isEmpty()) {//ถ้าทำครบทุกข้อqID จะเป็นค่าว่าง
-            dialogboxScore();// method เเสดงผลคพเเนนรวม
+            getNameString = getIntent().getStringExtra("Name");
+            dialogboxScore(getNameString);// method เเสดงผลคพเเนนรวม
         } else {//ถ้าทำยังไม่ครบทุกข้อ
             setQuestion(qID.remove(0));//เรียก method setQuestion()เเสดงคำถามถัดไป
 
@@ -235,10 +237,10 @@ public class GameActivity extends AppCompatActivity {
 
 
     }// end method choiceAns
-    private void dialogboxScore() {//method สำหรับเเสดงคะเเนน
+    private void dialogboxScore(String name) {//method สำหรับเเสดงคะเเนน
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("สรุปคะเเนน");
-        builder.setMessage("ได้คะเเนน " + score +" คะเเนน")
+        builder.setMessage( name + "ได้คะเเนน " + score +" คะเเนน")
             .setCancelable(false)
             .setPositiveButton("ออกจากเกม", new DialogInterface.OnClickListener() {
                 @Override
